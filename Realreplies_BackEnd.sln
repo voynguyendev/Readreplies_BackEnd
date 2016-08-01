@@ -1,26 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Realreplies_BackEnd", ".", "{738295F0-2191-4118-895E-A90A9549CE53}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Realreplies_BackendGit", ".", "{738295F0-2191-4118-895E-A90A9549CE53}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_7397"
-		Debug.AspNetCompiler.PhysicalPath = "D:\Project\Qbox\Realreplies_BackEnd\"
+		Debug.AspNetCompiler.PhysicalPath = "..\Realreplies_BackendGit\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7397\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_7397"
-		Release.AspNetCompiler.PhysicalPath = "D:\Project\Qbox\Realreplies_BackEnd\"
+		Release.AspNetCompiler.PhysicalPath = "..\Realreplies_BackendGit\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_7397\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "7397"
+		SlnRelativePath = "..\Realreplies_BackendGit\"
 	EndProjectSection
 EndProject
 Global

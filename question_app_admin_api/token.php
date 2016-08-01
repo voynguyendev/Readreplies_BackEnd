@@ -1,7 +1,6 @@
  <?php
    function encrypt_decrypt($action, $string) {
     $output = false;
-
     $encrypt_method = "AES-256-CBC";
     $secret_key = 'This is my secret key';
     $secret_iv = 'This is my secret iv';
@@ -20,23 +19,17 @@
 }
 
    function encrypttokent($string) {
-    $output = false;
-
-    $encrypt_method = "AES-256-CBC";
-    $secret_key = 'This is my secret key';
-    $secret_iv = 'This is my secret iv';
-    $key = hash('sha256', $secret_key);
-
-
-    $iv = substr(hash('sha256', $secret_iv), 0,100);
-    $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
-    $output = base64_encode($output);
-
-    return $output;
+    $token="";
+    foreach (getallheaders() as $name => $value) {
+    if($name=="Authorization") {
+          $token=$value;
+          break;
+    }
+	}
+     return  $token ;
 }
 
  ?>
-
 
 <?php
      header('Access-Control-Allow-Origin: *');  
