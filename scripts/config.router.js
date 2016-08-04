@@ -26,7 +26,7 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
 
       .state('app.dashboard', {
         url: '/',
-        templateUrl: 'views/dashboard.html',
+        templateUrl: 'views/Realreplies/dashboard.html',
         resolve: {
           deps: ['$ocLazyLoad', function ($ocLazyLoad) {
             return $ocLazyLoad.load([

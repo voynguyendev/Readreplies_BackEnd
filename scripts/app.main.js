@@ -2,8 +2,8 @@
 
 angular
   .module('ReadrepliesAdmin')
-  .controller('AppCtrl', ['$scope', '$http', '$localStorage',
-        function AppCtrl($scope, $http, $localStorage) {
+  .controller('AppCtrl', ['$scope', '$http', '$localStorage','AuthorizationService','$state',
+function AppCtrl($scope, $http, $localStorage, AuthorizationService,$state) {
       $scope.mobileView = 767;
       $scope.app = {
         name: 'Urban',
@@ -28,12 +28,29 @@ angular
         isConfigOpen: false
       };
 
+      $scope.logout = function () {
+          AuthorizationService.Logout();
+          $state.go('user.signin');
+      }
       $scope.user = {
-        fname: 'Samuel',
-        lname: 'Perkins',
-        jobDesc: 'Human Resources Guy',
+        fname: '',
+        lname: '',
+        jobDesc: 'Administrastor',
         avatar: 'images/avatar.jpg',
       };
+
+      AuthorizationService.Getuserinfor().then(function (response) {
+          if (response.status == "1")
+          {
+              $scope.user.fname = response.userinfor.username;
+              $scope.user.lname = "";
+          }
+          
+      }, function (errors) {
+          var errorObj = __errorHandler.ProcessErrors(errors);
+          __errorHandler.Swal(errorObj, _sweetAlert);
+      });
+
 
       if (angular.isDefined($localStorage.layout)) {
         $scope.app.layout = $localStorage.layout;

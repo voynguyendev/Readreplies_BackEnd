@@ -1,7 +1,11 @@
 'use strict';
 
-function dashboardCtrl($scope, $interval, COLORS) {
+function dashboardCtrl($scope, $interval, COLORS, HOSTSERVER, $http, AuthorizationService, $state) {
 
+    if (!AuthorizationService.IsAuthorized())
+    {
+        $state.go('user.signin');
+    }
   var visits = [
         [0, 8],
         [1, 1],
@@ -200,9 +204,36 @@ function dashboardCtrl($scope, $interval, COLORS) {
     color: COLORS.success,
     name: 'Earnings',
     data: seriesData2[0]
-    }];
+  }];
+
+    ////
+
+  $scope.countUsers = 0;
+  $scope.countPosts = 0;
+  $scope.countNewPosts = 0;
+  $scope.listnewposts = [];
+  $scope.listtoppostlikes = [];
+  $scope.listtoppostviews = [];
+  var data = {
+      userid: ""   
+  };
+
+  $http.post(HOSTSERVER.url + '/daskboard.php', data).success(function (response) {
+      $scope.countUsers = response.countuser;
+      $scope.countPosts = response.countpost;
+      $scope.countNewPosts = response.countnewpost;
+      $scope.listnewposts = response.newposts;
+      $scope.listtoppostlikes = response.toppostslike;
+      $scope.listtoppostviews = response.toppostsview;
+
+  }).error(function (errors, status) {
+      var errorObj = __errorHandler.ProcessErrors(errors);
+      __errorHandler.Swal(errorObj, _sweetAlert);
+  })
+   
+
 }
 
 angular
   .module('ReadrepliesAdmin')
-  .controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', dashboardCtrl]);
+  .controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', 'HOSTSERVER', '$http', 'AuthorizationService','$state', dashboardCtrl]);

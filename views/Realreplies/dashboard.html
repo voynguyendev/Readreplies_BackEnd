@@ -1,0 +1,158 @@
+<div data-ng-controller="dashboardCtrl">
+    <div class="row">
+        <div class="col-md-3">
+            <div>
+                <div class="widget bg-white">
+                    <div class="widget-icon bg-blue pull-left fa fa-microphone">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{countUsers}}</span>
+                        <span class="widget-subtitle">Registered users</span>
+                    </div>
+                </div>
+                <div class="widget bg-white">
+                    <div class="widget-icon bg-danger pull-left fa fa-tint">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{countPosts}}</span>
+                        <span class="widget-subtitle">Posts</span>
+                    </div>
+                </div>
+                <div class="widget bg-white">
+                    <div class="widget-icon bg-success pull-left fa fa-paper-plane">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{countNewPosts}}</span>
+                        <span class="widget-subtitle">New Posts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="widget-chart bg-white no-padding">
+                <div class="row absolute tp lt rt p15">
+                    <div class="col-xs-12">
+                        <div class="pull-right">
+                            <i class="fa fa-square text-primary mr5"></i> Mail Server
+                        </div>
+                        <small class="text-uppercase">Transfer speeds</small>
+                        <h4 class="text-primary bold no-margin">43.02mbps</h4>
+                    </div>
+                </div>
+                <rickshaw class="rickshaw_graph dashboard-rickshaw" rickshaw-options="options2" rickshaw-features="features5" rickshaw-series="series" style="height:250px"></rickshaw>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="widget-chart bg-white">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <small class="text-uppercase">Weekly distribution</small>
+                        <h4 class="no-margin bold text-success">3,490K</h4>
+                    </div>
+                </div>
+                <div class="canvas-holder mt5 mb5">
+                    <flot dataset="pieDataset" options="pieOptions" class="chart-sm" height="171"></flot>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading">
+                <h2> New Posts </h2>
+            </div>
+            <div class="panel-body">
+                <div class="no-more-tables">
+                    <table class="table table-bordered table-hover table-condensed align-middle">
+                        <thead>
+                            <tr>
+                                <th>Content</th>
+                                <th ">Comments</th>
+                                <th >Likes</th>
+                                <th >Views</th>
+                                <th >Users</th>
+                                <th >Date Update</th>
+                             
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="n in listnewposts track by $index">
+                                <td style="width:40%">{{n.question}}</td>
+                                <td style="width:4%">{{n.numberOfComments}}</td>
+                                <td style="width:4%">{{n.countlike}}</td>
+                                <td style="width:4%">{{n.numberOfViews}}</td>
+                                <td style="width:24%">{{n.email}}</td>
+                                <td style="width:24%">{{n.question_date_update}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading">
+                <h2> Top Posts Like </h2>
+            </div>
+            <div class="panel-body">
+                <div class="no-more-tables">
+                    <table class="table table-bordered table-hover table-condensed align-middle">
+                        <thead>
+                            <tr>
+                                <th>Content</th>
+                                <th>Comments</th>
+                                <th>Likes</th>
+                                <th >Views</th>
+                                <th>Users</th>
+                                <th> Date Update</th>
+
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="n in listtoppostlikes track by $index">
+                                <td style="width:40%">{{n.question}}</td>
+                                <td style="width:4%">{{n.numberOfComments}}</td>
+                                <td style="width:4%">{{n.countlike}}</td>
+                                <td style="width:4%">{{n.numberOfViews}}</td>
+                                <td style="width:24%">{{n.email}}</td>
+                                <td style="width:24%">{{n.question_date_update}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading">
+                <h2> Top Posts View </h2>
+            </div>
+            <div class="panel-body">
+                <div class="no-more-tables">
+                    <table class="table table-bordered table-hover table-condensed align-middle">
+                        <thead>
+                            <tr>
+                                <th >Content</th>
+                                <th >Comments</th>
+                                <th >Likes</th>
+                                <th >Views</th>
+                                <th>Users</th>
+                                <th >Date Update</th>
+
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="n in listtoppostviews track by $index">
+                                <td style="width:40%">{{n.question}}</td>
+                                <td style="width:4%">{{n.numberOfComments}}</td>
+                                <td style="width:4%">{{n.countlike}}</td>
+                                <td style="width:4%">{{n.numberOfViews}}</td>
+                                <td style="width:24%">{{n.email}}</td>
+                                <td style="width:24%">{{n.question_date_update}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

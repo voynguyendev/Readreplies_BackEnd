@@ -24,7 +24,7 @@ angular
             } else {
                 var accessToken = $cookies.get('access_token');
                 if (typeof accessToken != 'undefined') {
-                    config.headers.Authorization =accessToken;
+                    config.headers.Authorization =  accessToken;
                 } else if (typeof externalAccessToken != 'undefined') {
                     config.headers.Authorization = 'bearer ' + externalAccessToken;
                 }

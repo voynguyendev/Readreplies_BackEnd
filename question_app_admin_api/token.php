@@ -19,26 +19,22 @@
 }
 
    function encrypttokent($string) {
-    $token="";
-    foreach (getallheaders() as $name => $value) {
-    if($name=="Authorization") {
-          $token=$value;
-          break;
-    }
-	}
-     return  $token ;
+      $token="";
+      $token=encrypt_decrypt("encrypt",$string);
+      return  $token ;
 }
 
  ?>
 
 <?php
-     header('Access-Control-Allow-Origin: *');  
+
+   header('Access-Control-Allow-Origin: *');
     include('database/connection.php');
     $username=isset($_REQUEST['username'])?$_REQUEST['username']:'';
     $password=isset($_REQUEST['password'])?$_REQUEST['password']:'';
     $password=encrypt_decrypt("encrypt",$password);
    // echo  $password;
-    $checkforlogin=mysql_query("select * from  tbl_admin where username='$username' and password='$password' ") or die(mysql_error());
+    $checkforlogin=mysql_query("select username,userId from  tbl_admin where username='$username' and password='$password' ") or die(mysql_error());
 
     if( mysql_num_rows($checkforlogin)<=0)
     {
@@ -49,13 +45,17 @@
     else
     {
    //   $newtokent = random_bytes(32);
-    $newtokent= $username;
+  $date = date('Y-m-d h:i:s A');
+    $newtokent= $username.  $date;
+   // echo $username;
     for($i=0;$i<3;$i++)
-      $newtokent = encrypttokent($newtokent);
+    {  $newtokent = encrypttokent($newtokent);}
+
+   //	echo 'tokent :'.$newtokent;
      // $password = $generator->generateString(26, $username);
-      
-      $updatetokent=mysql_query("update  tbl_admin set token='$newtokent' where username='$username' and password='$password' ") or die(mysql_error());
-       echo json_encode(array("status"=>"1","message"=>"successfully","tokent"=>$newtokent));
+
+      $updatetokent=mysql_query("update  tbl_admin set token='$newtokent',expireddate='$date' where username='$username' and password='$password' ") or die(mysql_error());
+       echo json_encode(array("status"=>"1","message"=>"successfully","tokent"=>$newtokent,"userinfor"=>mysql_fetch_array($checkforlogin)));
     }
 
 ?>
