@@ -1,3 +1,5 @@
+/// <reference path="controllers/Realreplies/User/managerusercontroller.js" />
+/// <reference path="controllers/Realreplies/User/managerusercontroller.js" />
 'use strict';
 
 angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
@@ -1064,7 +1066,36 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
           title: 'Documentation',
           contentClasses: 'no-padding'
         }
-      });
+      }).
+        //Realreplies
+          state('app.users', {
+              template: '<div ui-view></div>',
+              abstract: true,
+              url: '/users',
+          }).
+
+          state('app.users.managerusers', {
+              url: '/usermanager',
+              templateUrl: 'views/Realreplies/User/manageruser.html',
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: [
+                                       
+                               'scripts/services/Realreplies/UserService.js',
+                            ]
+                        }]).then(function () {
+                            return $ocLazyLoad.load('scripts/controllers/Realreplies/User/managerusercontroller.js');
+                        });
+                  }]
+              },
+              data: {
+                  title: 'Manager Users',
+              }
+          })
+        ;
         }
     ])
   .config(['$ocLazyLoadProvider', function ($ocLazyLoadProvider) {

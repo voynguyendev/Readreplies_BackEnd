@@ -24,13 +24,13 @@
          {
              $newposts[$i]["question"]=$row1["question"];
 
-             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row['id'].""));
+             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row1['id'].""));
              $numberOfComments=$getNumberOfCommentQuery[0];
              $newposts[$i]["numberOfComments"]= $numberOfComments;
 
              $newposts[$i]["countlike"]=$row1["countlike"];
 
-             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE questionId=".$row['id'].""));
+             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE questionId=".$row1['id'].""));
              $numberOfViews=$getNumberOfViewQuery[0];
              $newposts[$i]["numberOfViews"]=$numberOfViews;
 
@@ -50,13 +50,13 @@
          {
              $toppostslike[$i]["question"]=$row1["question"];
 
-             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row['id'].""));
+             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row1['id'].""));
              $numberOfComments=$getNumberOfCommentQuery[0];
              $toppostslike[$i]["numberOfComments"]=$numberOfComments;
 
              $toppostslike[$i]["countlike"]=$row1["countlike"];
 
-             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE questionId=".$row['id'].""));
+             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE questionId=".$row1['id'].""));
              $numberOfViews=$getNumberOfViewQuery[0];
              $toppostslike[$i]["numberOfViews"]=$numberOfViews;
 
@@ -75,7 +75,7 @@
          {
              $toppostsview[$i]["question"]=$row1["question"];
 
-             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row['id'].""));
+             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row1['id'].""));
              $numberOfComments=$getNumberOfCommentQuery[0];
              $toppostsview[$i]["numberOfComments"]=$numberOfComments;
 

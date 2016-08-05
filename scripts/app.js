@@ -19,7 +19,8 @@ angular
     'ngSanitize',
     'ui.utils',
     'ngTouch',
-    'oitozero.ngSweetAlert'
+    'oitozero.ngSweetAlert',
+    'datatables'
   ])
   .constant('COLORS', {
     'default': '#e2e2e2',

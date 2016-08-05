@@ -1,0 +1,22 @@
+<div class="panel" data-ng-controller="managerusercontroller">
+    <div class="panel-body">
+        <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"  >
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Email</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="person in usersmanager">
+                    <td>{{ person.id }}</td>
+                    <td>{{ person.email }}</td>
+                    <td>{{ person.name }}</td>
+                    <td>{{ person.lname }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
