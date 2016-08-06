@@ -50,19 +50,25 @@
         </li>
       </ul>
     </li>
-      <li data-ng-class="{open: $state.includes('app.ui')}">
-          <a href="javascript:;">
-              <i class="fa fa-toggle-on"></i>
-              <span>Posts</span>
+    <!-- /ui -->
+
+    <!-- forms -->
+    <li data-ng-class="{open: $state.includes('app.forms')}">
+      <a href="javascript:;">
+        <i class="fa fa-tint"></i>
+        <span>Posts</span>
+      </a>
+      <ul class="sub-menu">
+        <li ui-sref-active="active">
+          <a ui-sref="app.forms.native_forms">
+            <span>Manager Posts</span>
           </a>
-          <ul class="sub-menu">
-              <li ui-sref-active="active">
-                  <a ui-sref="app.users.managerusers">
-                      <span>Manager Posts</span>
-                  </a>
-              </li>
-          </ul>
-      </li>
+        </li>
+      
+      </ul>
+    </li>
+    <!-- /forms -->
+
 
   </ul>
 </nav>
