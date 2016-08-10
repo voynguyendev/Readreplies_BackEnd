@@ -1,0 +1,46 @@
+<div class="panel" data-ng-controller="managerpostcontroller">
+    <div class="panel-body">
+        <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng" dt-options="dtOptions"   >
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th  >Content</th>
+                    <th>Date Create</th>
+                    <th >Date Update</th>
+                    <th >Created By</th>
+                    <th> Flags</th>
+                    <th >Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="post in postsmanager">
+                    <td  style="width:5%">{{ post.id }}</td>
+                    <td style="width:30%">{{ post.question }}</td>
+                    <td  style="width:10%">{{ post.question_date }}</td>
+                    <td  style="width:10%">{{ post.question_date_update }}</td>
+                    <td  style="width:10%">{{ post.email }}</td>
+                    <td style="width:5%">{{ post.numberOfFlag }}</td>
+                    <td style="width:30%">
+                    <button type="button" ng-click="viewcomment(post)" class="btn btn-primary">View Comments</button> <button type="button" ng-click="viewimages(post)" class="btn btn-primary">View Images</button> 
+                    <button ng-click="blockquesion(post)" type="button" class="btn btn-danger">{{getBlockTitle(post)}}</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script type="text/ng-template" id="ModelslideImages.html">
+    <div class="container" >
+        <div class="imageContainer" ng-repeat="image in images" ng-hide="!isCurrentIndex($index)">
+            <img class="imageWrapper" src="{{image.url}}"
+                 ng-swipe-left="showNext()" ng-swipe-right="showPrevious()"/>
+          
+        </div>
+
+        <nav>
+            <div class="thumbnailWrapper">
+                <img ng-repeat="image in images" class="thumbnail" ng-class="{'active':isCurrentIndex($index)}" ng-click="setCurrentIndex($index);" src="{{image.thumb}}"/>
+            </div>
+        </nav>
+    </div>
+</script>

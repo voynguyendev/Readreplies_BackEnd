@@ -1,0 +1,23 @@
+<div class="panel" data-ng-controller="managerrolecontroller">
+    <div class="panel-body">
+        <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="role in rolesmanager">
+                    <td>{{ role.roleid }}</td>
+                    <td>{{ role.rolename }}</td>
+                    <td>{{ role.description	 }}</td>
+                    <td><button type="button" ng-click="editrole(role)" class="btn btn-primary">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

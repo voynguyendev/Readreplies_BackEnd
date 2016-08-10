@@ -1,6 +1,7 @@
 'use strict';
 
-function uploadCtrl($scope, FileUploader) {
+function 
+($scope, FileUploader) {
   var uploader = $scope.uploader = new FileUploader({
     //url: 'scripts/upload.php'
   });

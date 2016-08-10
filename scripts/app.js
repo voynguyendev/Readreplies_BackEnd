@@ -20,7 +20,8 @@ angular
     'ui.utils',
     'ngTouch',
     'oitozero.ngSweetAlert',
-    'datatables'
+    'datatables',
+    'ngMessages'
   ])
   .constant('COLORS', {
     'default': '#e2e2e2',

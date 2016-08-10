@@ -10,8 +10,15 @@ angular
       }
 
       var _isAuthorized = function () {
+          _accessToken = $cookies.get('access_token');
+          if (_accessToken) {
+              _authorized = true;
+          }
+          else
+              _authorized = false;
           return _authorized;
       }
+
       var _getuserinfor = function () {
               var deferer = $q.defer();
               $http.post(HOSTSERVER.url + '/getuserinfor.php').success(function (response) {
@@ -23,11 +30,14 @@ angular
       }
       var _auth = function (accessToken,userinfor) {
           _authorized = true;
-          $cookies.put('access_token', accessToken, { path: '/' });
+          var expireDate = new Date();
+          expireDate.setDate(expireDate.getDate() + 2);
+          $cookies.put('access_token', accessToken, { 'expires': expireDate });
       }
 
       var _unAuth = function () {
           _authorized = false;
+        
           $cookies.remove('access_token', { path: '/' });
       }
 

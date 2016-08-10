@@ -7,6 +7,7 @@
                     <th>Email</th>
                     <th>FirstName</th>
                     <th>LastName</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,8 +16,25 @@
                     <td>{{ person.email }}</td>
                     <td>{{ person.name }}</td>
                     <td>{{ person.lname }}</td>
+                    <td><button type="button" ng-click="edituser(person)" class="btn btn-primary">Edit</button> <button ng-click="blockuser(person)" type="button" class="btn btn-danger">{{getBlockTitle(person)}}</button><button type="button" ng-click="viewimages(person)" class="btn btn-primary">View Images</button><button type="button" ng-click="viewcomments(person)" class="btn btn-primary">View Comments</button> </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<script type="text/ng-template" id="ModelslideImages.html">
+    <div class="container">
+        <div class="imageContainer" ng-repeat="image in images" ng-hide="!isCurrentIndex($index)">
+            <img class="imageWrapper" src="{{image.url}}"
+                 ng-swipe-left="showNext()" ng-swipe-right="showPrevious()" />
+
+        </div>
+
+        <nav>
+            <div class="thumbnailWrapper">
+                <img ng-repeat="image in images" class="thumbnail" ng-class="{'active':isCurrentIndex($index)}" ng-click="setCurrentIndex($index);" src="{{image.thumb}}" />
+            </div>
+        </nav>
+    </div>
+</script>

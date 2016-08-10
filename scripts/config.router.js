@@ -1094,7 +1094,359 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
               data: {
                   title: 'Manager Users',
               }
+          }).
+         state('app.users.createuser', {
+             url: '/createuser?email&name&lname&disabled&id',
+             templateUrl: 'views/Realreplies/User/createuser.html',
+             resolve: {
+                 deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                     return $ocLazyLoad.load([
+                       {
+                           serie: true,
+                           files: [
+                              'scripts/services/Realreplies/UserService.js',
+                               'scripts/directives/Realreplies/compareTo.js',
+                           ]
+                       }]).then(function () {
+                           return $ocLazyLoad.load('scripts/controllers/Realreplies/User/createusercontroller.js');
+                       });
+                 }]
+             },
+             data: {
+                 title: 'Create User',
+             }
+         }).
+         state('app.posts', {
+             template: '<div ui-view></div>',
+             abstract: true,
+             url: '/posts',
+         }).
+
+          state('app.posts.managerposts', {
+              url: '/postmanager',
+              templateUrl: 'views/Realreplies/Post/managerpost.html',
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: [
+                               'scripts/services/Realreplies/PostService.js',
+                            ]
+                        }]).then(function () {
+                            return $ocLazyLoad.load('scripts/controllers/Realreplies/Post/managerpostcontroller.js');
+                        });
+                  }]
+              },
+              data: {
+                  title: 'Manager Posts',
+              }
           })
+
+        .
+        
+          state('app.posts.managerpostsofuser', {
+              url: '/postmanagerofuser?id',
+              templateUrl: 'views/Realreplies/Post/managerpost.html',
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: [
+                               'scripts/services/Realreplies/PostService.js',
+                            ]
+                        }]).then(function () {
+                            return $ocLazyLoad.load('scripts/controllers/Realreplies/Post/managerpostcontroller.js');
+                        });
+                  }]
+              },
+              data: {
+                  title: 'Manager Posts',
+              }
+          })
+        .
+             state('app.comments', {
+                 template: '<div ui-view></div>',
+                 abstract: true,
+                 url: '/comments',
+             }).
+
+          state('app.comments.managercomments', {
+              url: '/managercomment',
+              templateUrl: 'views/Realreplies/Comment/managercommernt.html',
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: [
+                               'scripts/services/Realreplies/CommentService.js',
+                            ]
+                        }]).then(function () {
+                            return $ocLazyLoad.load('scripts/controllers/Realreplies/Comment/managercommentcontroller.js');
+                        });
+                  }]
+              },
+              data: {
+                  title: 'Manager Comments',
+              }
+          }).
+           state('app.comments.managercommentsofquestion', {
+               url: '/managercommentsofquestion?id',
+               templateUrl: 'views/Realreplies/Comment/managercommernt.html',
+               resolve: {
+                   deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                       return $ocLazyLoad.load([
+                         {
+                             serie: true,
+                             files: [
+                                'scripts/services/Realreplies/CommentService.js',
+                             ]
+                         }]).then(function () {
+                             return $ocLazyLoad.load('scripts/controllers/Realreplies/Comment/managercommentcontroller.js');
+                         });
+                   }]
+               },
+               data: {
+                   title: 'Manager Comments',
+               }
+           })
+         .
+             state('app.roles', {
+                 template: '<div ui-view></div>',
+                 abstract: true,
+                 url: '/roles',
+             }).
+
+          state('app.roles.managerroles', {
+              url: '/managerrole',
+              templateUrl: 'views/Realreplies/Role/managerrole.html',
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: [
+                               'scripts/services/Realreplies/RoleService.js',
+                            ]
+                        }]).then(function () {
+                            return $ocLazyLoad.load('scripts/controllers/Realreplies/Role/managerrolecontroller.js');
+                        });
+                  }]
+              },
+              data: {
+                  title: 'Manager Roles',
+              }
+          }).
+         state('app.roles.createroles', {
+             url: '/createrole',
+             templateUrl: 'views/Realreplies/Role/createrole.html',
+             resolve: {
+                 deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                     return $ocLazyLoad.load([
+                {
+                    insertBefore: '#load_styles_before',
+                    files: [
+                                  'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+                                  'vendor/chosen_v1.4.0/chosen.min.css',
+                                  'vendor/jquery.tagsinput/src/jquery.tagsinput.css',
+                                  'vendor/checkbo/src/0.1.4/css/checkBo.min.css',
+                                  'vendor/intl-tel-input/build/css/intlTelInput.css',
+                                  'vendor/bootstrap-daterangepicker/daterangepicker-bs3.css',
+                                  'vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                                  'vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                                  'vendor/clockpicker/dist/bootstrap-clockpicker.min.css',
+                                  'vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'
+                    ]
+                },
+                {
+                    serie: true,
+                    files: [
+                                  'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
+                                  'vendor/chosen_v1.4.0/chosen.jquery.min.js',
+                                  'vendor/jquery.tagsinput/src/jquery.tagsinput.js',
+                                  'vendor/checkbo/src/0.1.4/js/checkBo.min.js',
+                                  'vendor/intl-tel-input//build/js/intlTelInput.min.js',
+                                  'vendor/moment/min/moment.min.js',
+                                  'vendor/bootstrap-daterangepicker/daterangepicker.js',
+                                  'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+                                  'vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                                  'vendor/clockpicker/dist/jquery-clockpicker.min.js',
+                                  'vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'
+                    ]
+                }]).then(function () {
+                           return $ocLazyLoad.load('scripts/controllers/Realreplies/Role/createrolecontroller.js');
+                       });
+                 }]
+             },
+             data: {
+                 title: 'Create Role',
+             }
+         }).
+        
+      state('app.roles.editroles', {
+          url: '/editrole?roleid&rolename&description',
+          templateUrl: 'views/Realreplies/Role/createrole.html',
+          resolve: {
+              deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                  return $ocLazyLoad.load([
+             {
+                 insertBefore: '#load_styles_before',
+                 files: [
+                               'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+                               'vendor/chosen_v1.4.0/chosen.min.css',
+                               'vendor/jquery.tagsinput/src/jquery.tagsinput.css',
+                               'vendor/checkbo/src/0.1.4/css/checkBo.min.css',
+                               'vendor/intl-tel-input/build/css/intlTelInput.css',
+                               'vendor/bootstrap-daterangepicker/daterangepicker-bs3.css',
+                               'vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                               'vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                               'vendor/clockpicker/dist/bootstrap-clockpicker.min.css',
+                               'vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'
+                 ]
+             },
+             {
+                 serie: true,
+                 files: [
+                               'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
+                               'vendor/chosen_v1.4.0/chosen.jquery.min.js',
+                               'vendor/jquery.tagsinput/src/jquery.tagsinput.js',
+                               'vendor/checkbo/src/0.1.4/js/checkBo.min.js',
+                               'vendor/intl-tel-input//build/js/intlTelInput.min.js',
+                               'vendor/moment/min/moment.min.js',
+                               'vendor/bootstrap-daterangepicker/daterangepicker.js',
+                               'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+                               'vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                               'vendor/clockpicker/dist/jquery-clockpicker.min.js',
+                               'vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'
+                 ]
+             }]).then(function () {
+                 return $ocLazyLoad.load('scripts/controllers/Realreplies/Role/createrolecontroller.js');
+             });
+              }]
+          },
+          data: {
+              title: 'Create Role',
+          }
+      }).
+  state('app.usersystems', {
+      template: '<div ui-view></div>',
+      abstract: true,
+      url: '/comments',
+  }).
+      state('app.usersystems.managerusersystems', {
+          url: '/managerusersystem',
+          templateUrl: 'views/Realreplies/UserSystem/managerusersystem.html',
+          resolve: {
+              deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                  return $ocLazyLoad.load([
+                    {
+                        serie: true,
+                        files: [
+                           'scripts/services/Realreplies/UserSystemService.js',
+                        ]
+                    }]).then(function () {
+                        return $ocLazyLoad.load('scripts/controllers/Realreplies/UserSystem/managerusersystemcontroller.js');
+                    });
+              }]
+          },
+          data: {
+              title: 'Manager User System',
+          }
+      }).
+      state('app.usersystems.createusersystem', {
+          url: '/createusersystem',
+          templateUrl: 'views/Realreplies/UserSystem/createusersystem.html',
+          resolve: {
+              deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                  return $ocLazyLoad.load([
+             {
+                 insertBefore: '#load_styles_before',
+                 files: [
+                               'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+                               'vendor/chosen_v1.4.0/chosen.min.css',
+                               'vendor/jquery.tagsinput/src/jquery.tagsinput.css',
+                               'vendor/checkbo/src/0.1.4/css/checkBo.min.css',
+                               'vendor/intl-tel-input/build/css/intlTelInput.css',
+                               'vendor/bootstrap-daterangepicker/daterangepicker-bs3.css',
+                               'vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                               'vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                               'vendor/clockpicker/dist/bootstrap-clockpicker.min.css',
+                               'vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'
+                 ]
+             },
+             {
+                 serie: true,
+                 files: [
+                               'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
+                               'vendor/chosen_v1.4.0/chosen.jquery.min.js',
+                               'vendor/jquery.tagsinput/src/jquery.tagsinput.js',
+                               'vendor/checkbo/src/0.1.4/js/checkBo.min.js',
+                               'vendor/intl-tel-input//build/js/intlTelInput.min.js',
+                               'vendor/moment/min/moment.min.js',
+                               'vendor/bootstrap-daterangepicker/daterangepicker.js',
+                               'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+                               'vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                               'vendor/clockpicker/dist/jquery-clockpicker.min.js',
+                               'vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'
+                 ]
+             }]).then(function () {
+                 return $ocLazyLoad.load('scripts/controllers/Realreplies/UserSystem/createusersystemcontroller.js');
+             });
+              }]
+          },
+          data: {
+              title: 'Create User System',
+          }
+      }).
+
+   state('app.usersystems.editusersystem', {
+       url: '/editusersystem?userId&username',
+       templateUrl: 'views/Realreplies/UserSystem/createusersystem.html',
+       resolve: {
+           deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+               return $ocLazyLoad.load([
+          {
+              insertBefore: '#load_styles_before',
+              files: [
+                            'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+                            'vendor/chosen_v1.4.0/chosen.min.css',
+                            'vendor/jquery.tagsinput/src/jquery.tagsinput.css',
+                            'vendor/checkbo/src/0.1.4/css/checkBo.min.css',
+                            'vendor/intl-tel-input/build/css/intlTelInput.css',
+                            'vendor/bootstrap-daterangepicker/daterangepicker-bs3.css',
+                            'vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                            'vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                            'vendor/clockpicker/dist/bootstrap-clockpicker.min.css',
+                            'vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css'
+              ]
+          },
+          {
+              serie: true,
+              files: [
+                            'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
+                            'vendor/chosen_v1.4.0/chosen.jquery.min.js',
+                            'vendor/jquery.tagsinput/src/jquery.tagsinput.js',
+                            'vendor/checkbo/src/0.1.4/js/checkBo.min.js',
+                            'vendor/intl-tel-input//build/js/intlTelInput.min.js',
+                            'vendor/moment/min/moment.min.js',
+                            'vendor/bootstrap-daterangepicker/daterangepicker.js',
+                            'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+                            'vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                            'vendor/clockpicker/dist/jquery-clockpicker.min.js',
+                            'vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js'
+              ]
+          }]).then(function () {
+              return $ocLazyLoad.load('scripts/controllers/Realreplies/UserSystem/createusersystemcontroller.js');
+          });
+           }]
+       },
+       data: {
+           title: 'Edit User System',
+       }
+   })
+
         ;
         }
     ])

@@ -6,9 +6,7 @@
      include('autherncation.php');
 
      $usercurrentid=$userinfor["id"];
-
-
-
+       
      echo json_encode(array("status"=>"1","message"=>"successfully",
      "userinfor"=>$userinfor
      ));

@@ -44,7 +44,7 @@
           </a>
         </li>
         <li ui-sref-active="active">
-          <a ui-sref="app.ui.directives">
+          <a ui-sref="app.users.createuser">
             <span>Create User</span>
           </a>
         </li>
@@ -53,14 +53,14 @@
     <!-- /ui -->
 
     <!-- forms -->
-    <li data-ng-class="{open: $state.includes('app.forms')}">
+    <li data-ng-class="{open: $state.includes('app.ui')}">
       <a href="javascript:;">
         <i class="fa fa-tint"></i>
         <span>Posts</span>
       </a>
       <ul class="sub-menu">
         <li ui-sref-active="active">
-          <a ui-sref="app.forms.native_forms">
+          <a ui-sref="app.posts.managerposts">
             <span>Manager Posts</span>
           </a>
         </li>
@@ -69,7 +69,59 @@
     </li>
     <!-- /forms -->
 
+      <!-- forms -->
+      <li data-ng-class="{open: $state.includes('app.ui')}">
+          <a href="javascript:;">
+              <i class="fa fa-tint"></i>
+              <span>Comments</span>
+          </a>
+          <ul class="sub-menu">
+              <li ui-sref-active="active">
+                  <a ui-sref="app.comments.managercomments">
+                      <span>Manager Comments</span>
+                  </a>
+              </li>
 
+          </ul>
+      </li>
+      <!-- /forms -->
+      <!-- forms -->
+      <li data-ng-class="{open: $state.includes('app.ui')}">
+          <a href="javascript:;">
+              <i class="fa fa-tint"></i>
+              <span>Roles</span>
+          </a>
+          <ul class="sub-menu">
+              <li ui-sref-active="active">
+                  <a ui-sref="app.roles.managerroles">
+                      <span>Manager Roles</span>
+                  </a>
+              </li>
+              <li ui-sref-active="active">
+                  <a ui-sref="app.roles.createroles">
+                      <span>Create Role</span>
+                  </a>
+              </li>
+          </ul>
+      </li>
+      <li data-ng-class="{open: $state.includes('app.ui')}">
+          <a href="javascript:;">
+              <i class="fa fa-tint"></i>
+              <span>Users System</span>
+          </a>
+          <ul class="sub-menu">
+              <li ui-sref-active="active">
+                  <a ui-sref="app.usersystems.managerusersystems">
+                      <span>Manager Users System</span>
+                  </a>
+              </li>
+              <li ui-sref-active="active">
+                  <a ui-sref="app.usersystems.createusersystem">
+                      <span>Create User System</span>
+                  </a>
+              </li>
+          </ul>
+      </li>
   </ul>
 </nav>
 <!-- /main navigation -->

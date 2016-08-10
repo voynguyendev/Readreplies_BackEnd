@@ -1,0 +1,21 @@
+<div class="panel" data-ng-controller="managerusersystemcontroller">
+    <div class="panel-body">
+        <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"  >
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>UserName</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in usersystemmanager">
+                    <td>{{ user.userId }}</td>
+                    <td>{{ user.username }}</td>
+                    <td><button type="button" ng-click="editusersystem(user)" class="btn btn-primary">Edit</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+﻿* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif; }
+
+.container {
+  margin: 20px; }
+
+.imageWrapper {
+  display: block;
+  width:520px;
+  height: 800px;
+  background-size: cover;
+  background-position: center;
+  transition: all 1s; }
+
+.thumbnailWrapper {
+  display: inline-block;
+  width: 350px;
+  text-align: center; }
+
+.thumbnail {
+  display: inline-block;
+  width: 60px;
+  height: 40px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 10px;
+  background-color: #efefef;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  vertical-align: top;
+  opacity: 0.6;
+  transition: all 0.3s; }
+  .thumbnail:hover {
+    opacity: 0.9; }
+
+.active {
+  opacity: 1; }
+
