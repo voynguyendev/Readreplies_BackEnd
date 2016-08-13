@@ -1,28 +1,29 @@
 <div class="panel" data-ng-controller="managerpostcontroller">
     <div class="panel-body">
-        <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng" dt-options="dtOptions"   >
+        <table dt-columns="dtColumns"  dt-options="dtOptions"   class="table table-bordered bordered table-striped table-condensed datatable" datatable=""    >
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th  >Content</th>
+                    <th>Content</th>
                     <th>Date Create</th>
-                    <th >Date Update</th>
-                    <th >Created By</th>
+                    <th>Date Update</th>
+                    <th>Created By</th>
                     <th> Flags</th>
-                    <th >Actions</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="post in postsmanager">
-                    <td  style="width:5%">{{ post.id }}</td>
+                    <td style="width:5%">{{ post.id }}</td>
                     <td style="width:30%">{{ post.question }}</td>
-                    <td  style="width:10%">{{ post.question_date }}</td>
-                    <td  style="width:10%">{{ post.question_date_update }}</td>
-                    <td  style="width:10%">{{ post.email }}</td>
+                    <td style="width:10%">{{ post.question_date }}</td>
+                    <td style="width:10%">{{ post.question_date_update }}</td>
+                    <td style="width:10%">{{ post.email }}</td>
                     <td style="width:5%">{{ post.numberOfFlag }}</td>
                     <td style="width:30%">
-                    <button type="button" ng-click="viewcomment(post)" class="btn btn-primary">View Comments</button> <button type="button" ng-click="viewimages(post)" class="btn btn-primary">View Images</button> 
-                    <button ng-click="blockquesion(post)" type="button" class="btn btn-danger">{{getBlockTitle(post)}}</button></td>
+                        <button type="button" ng-click="viewcomment(post)" class="btn btn-primary">View Comments({{post.numberOfComments}})</button> <button type="button" ng-click="viewimages(post)" class="btn btn-primary">View Images({{post.numberOfImages}})</button>
+                        <button ng-click="blockquesion(post)" type="button" class="btn btn-danger">{{getBlockTitle(post)}}</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

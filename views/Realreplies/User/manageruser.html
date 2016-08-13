@@ -1,6 +1,6 @@
 <div class="panel" data-ng-controller="managerusercontroller">
     <div class="panel-body">
-        <table class="table table-bordered bordered table-striped table-condensed datatable" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs"  >
+        <table dt-columns="dtColumns" dt-options="dtOptions" class="table table-bordered bordered table-striped table-condensed datatable" datatable="">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -16,7 +16,7 @@
                     <td>{{ person.email }}</td>
                     <td>{{ person.name }}</td>
                     <td>{{ person.lname }}</td>
-                    <td><button type="button" ng-click="edituser(person)" class="btn btn-primary">Edit</button> <button ng-click="blockuser(person)" type="button" class="btn btn-danger">{{getBlockTitle(person)}}</button><button type="button" ng-click="viewimages(person)" class="btn btn-primary">View Images</button><button type="button" ng-click="viewcomments(person)" class="btn btn-primary">View Comments</button> </td>
+                    <td><button type="button" ng-click="edituser(person)" class="btn btn-primary">Edit</button> <button ng-click="blockuser(person)" type="button" class="btn btn-danger">{{getBlockTitle(person)}}</button><button type="button" ng-click="viewimages(person)" class="btn btn-primary">View Images({{person.numberOfImage}})</button><button type="button" ng-click="viewcomments(person)" class="btn btn-primary">View Posts({{person.numberOfquestion}})</button> </td>
                 </tr>
             </tbody>
         </table>

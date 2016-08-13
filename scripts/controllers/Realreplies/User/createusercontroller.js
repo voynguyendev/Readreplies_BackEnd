@@ -55,8 +55,12 @@ function createusercontroller($scope, $interval, COLORS, HOSTSERVER, $http, Auth
 
             }
             ).success(function (response) {
-              if (response.status == "-1") {
+                if (response.status == "-1") {
                     SweetAlert.swal('Access Denied!', "you can't have permission to access  this page ", 'error');
+                    return;
+                }
+                else if (response.status == "-2") {
+                    $state.go('user.signin');
                     return;
                 }
             if (response.status=="0")

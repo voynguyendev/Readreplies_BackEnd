@@ -59,8 +59,14 @@ function createrolecontroller($scope, $interval, COLORS, HOSTSERVER, $http, Auth
                 }
 
             }).success(function (response) {
-              //  $scope.menus = [];
-               // $scope.multiplemenuSelect = [];
+                if (response.status == "-1") {
+                    SweetAlert.swal('Access Denied!', "you can't have permission to access  this page ", 'error');
+                    return;
+                }
+                else if (response.status == "-2") {
+                    $state.go('user.signin');
+                    return;
+                }
                 $($scope.menuobjects).each(function (index) {
                     $scope.menus.push($scope.menuobjects[index].name);
                 });
@@ -131,6 +137,10 @@ function createrolecontroller($scope, $interval, COLORS, HOSTSERVER, $http, Auth
             ).success(function (response) {
                 if (response.status == "-1") {
                     SweetAlert.swal('Access Denied!', "you can't have permission to access  this page ", 'error');
+                    return;
+                }
+                else if (response.status == "-2") {
+                    $state.go('user.signin');
                     return;
                 }
 

@@ -17,6 +17,10 @@ function managerrolecontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
             SweetAlert.swal('Access Denied!', "you can't have permission to access  this page ", 'error');
             return;
         }
+        else if (response.status == "-2") {
+            $state.go('user.signin');
+            return;
+        }
         $scope.rolesmanager = response.roles;
     }).error(function (errors, status) {
         var errorObj = __errorHandler.ProcessErrors(errors);

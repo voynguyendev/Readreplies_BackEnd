@@ -219,6 +219,15 @@ function dashboardCtrl($scope, $interval, COLORS, HOSTSERVER, $http, Authorizati
   };
 
   $http.post(HOSTSERVER.url + '/daskboard.php', data).success(function (response) {
+
+      if (response.status == "-1") {
+          SweetAlert.swal('Access Denied!', "you can't have permission to access  this page ", 'error');
+          return;
+      }
+      else if (response.status == "-2") {
+          $state.go('user.signin');
+          return;
+      }
       $scope.countUsers = response.countuser;
       $scope.countPosts = response.countpost;
       $scope.countNewPosts = response.countnewpost;

@@ -26,7 +26,7 @@
      $checkfortoken=mysql_query("select username,userId,isadmin from  tbl_admin where token <> '' and token='$token' and expireddate >SUBDATE(timestamp(now()), INTERVAL 48 HOUR) ") or die(mysql_error());
     if( mysql_num_rows($checkfortoken)<=0)
     {
-       echo json_encode(array("status"=>"0","message"=>"invalid token"));
+       echo json_encode(array("status"=>"-2","message"=>"invalid token"));
        exit;
 
     }
