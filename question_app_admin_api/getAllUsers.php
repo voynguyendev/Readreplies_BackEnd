@@ -18,7 +18,7 @@
 
      if($textsearch!="")
      {
-         $query=$query." and (email like '%".$textsearch."%' or name like '%".$textsearch."%' or lname like '%".$textsearch."%')" ;
+         $query=$query." where (email like '%".$textsearch."%' or name like '%".$textsearch."%' or lname like '%".$textsearch."%')" ;
      }
      $totalrow=mysql_num_rows(mysql_query($query))   ;
      $sqluserinfors=mysql_query($query." order by id DESC LIMIT $start,$pagesize") or die(mysql_error());
