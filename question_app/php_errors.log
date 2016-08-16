@@ -1,0 +1,23 @@
+[08-May-2016 07:14:12 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 07:14:20 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 07:17:03 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 07:39:31 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 07:59:45 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:07:11 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:08:53 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:11:37 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:13:21 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:15:26 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:15:27 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:15:30 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[08-May-2016 08:15:31 America/Los_Angeles] PHP Notice:  Undefined index: fileToUpload in /var/www/html/question_app/uploadimage.php on line 32
+[31-May-2016 00:02:50 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '$email' (T_VARIABLE), expecting ',' or ';' in /var/www/html/question_app/sendmail_code_password.php on line 6
+[31-May-2016 00:04:57 America/Los_Angeles] PHP Parse error:  syntax error, unexpected '$email' (T_VARIABLE), expecting ',' or ';' in /var/www/html/question_app/sendmail_code_password.php on line 6
+[31-May-2016 01:38:22 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ';' in /var/www/html/question_app/sendmail_code_password.php on line 56
+[28-Jun-2016 00:52:39 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /var/www/html/question_app/questions.php on line 218
+[28-Jun-2016 00:54:12 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /var/www/html/question_app/questions.php on line 218
+[28-Jun-2016 00:56:20 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /var/www/html/question_app/questions.php on line 218
+[28-Jun-2016 00:57:09 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /var/www/html/question_app/questions.php on line 218
+[28-Jun-2016 01:00:50 America/Los_Angeles] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE) in /var/www/html/question_app/questions.php on line 218
+[29-Jun-2016 21:25:42 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ']' in /var/www/html/question_app/getQuestionImagesbyquestionid.php on line 22
+[29-Jun-2016 21:25:55 America/Los_Angeles] PHP Parse error:  syntax error, unexpected ']' in /var/www/html/question_app/getQuestionImagesbyquestionid.php on line 22
