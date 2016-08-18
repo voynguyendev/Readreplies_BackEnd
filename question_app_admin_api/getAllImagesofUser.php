@@ -6,7 +6,7 @@
      $userid=isset($_REQUEST['userid'])?$_REQUEST['userid']:'';
 
      mysql_query('SET CHARACTER SET utf8');
-     $sqluserImages=mysql_query("select * from  imagesuser where 	userid='$userid'") or die(mysql_error());
+     $sqluserImages=mysql_query("select * from  questions where  entity=1 and userid='$userid'") or die(mysql_error());
      $userimages=[];
      $i=0;
      if(mysql_num_rows($sqluserImages)>0 && $userid!="")
@@ -16,7 +16,7 @@
            $userimages[$i]["id"]=   $row1["id"]   ;
            $userimages[$i]["thumb"]=   $row1["thumb"]   ;
            $userimages[$i]["attachment"]=   $row1["attachment"]   ;
-           $userimages[$i]["userid"]=   $row1["userid"] ;
+           $userimages[$i]["userid"]=   $row1["userId"] ;
            $i++;
          }
      }

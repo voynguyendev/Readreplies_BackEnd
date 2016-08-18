@@ -7,7 +7,7 @@ define('UPLOAD_DIR_THUMB', '../question_app/uploads/thumbs/');
 
 $server=$_SERVER['HTTP_HOST'];
 $name = isset($_REQUEST['name'])?$_REQUEST['name']:""; 
-$email = isset($_REQUEST['email'])?$_REQUEST['email']:""; 
+$email = isset($_REQUEST['email'])?$_REQUEST['email']:"";
 //$password = isset($_REQUEST['password'])?$_REQUEST['password']:""; 
 //$mobile = isset($_REQUEST['mobile'])?$_REQUEST['mobile']:"";
 $school = isset($_REQUEST['school'])?$_REQUEST['school']:"";
@@ -15,8 +15,8 @@ $grade = isset($_REQUEST['grade'])?$_REQUEST['grade']:"";
 $city = isset($_REQUEST['city'])?$_REQUEST['city']:"";
 $user_id=isset($_REQUEST['user_id'])?$_REQUEST['user_id']:"";
 $timezone=isset($_REQUEST['timezone'])?$_REQUEST['timezone']:"America/Los_Angeles";
-	 
-//------------------------------------	
+
+//------------------------------------
 $lname = isset($_REQUEST['lname'])?$_REQUEST['lname']:"";
 $dob = isset($_REQUEST['dob'])?$_REQUEST['dob']:"";
 $gender = isset($_REQUEST['gender'])?$_REQUEST['gender']:"";
@@ -35,17 +35,18 @@ $workat=isset($_REQUEST['workat'])?$_REQUEST['workat']:"";
 // $encrypted_txt = encrypt_decrypt('encrypt', $password);
 if($user_id!='')
 	{
-        
+
         if($action=="delete")
         {
-          $query="update  usersinfo set thumb='',profile_pic='' where thumb=(select thumb from imagesuser where id=".$imageid.")";
+          $query="update  usersinfo set thumb='',profile_pic='' where thumb=(select thumb from questions where id=".$imageid.")";
            $result = mysql_query($query) or die(mysql_error());
-
-            $query="delete from imagesuser where id=".$imageid;
+            $deletequestionanswer=mysql_query("DELETE FROM imagesquestion  WHERE questionId='".$imageid."'");
+            $deletequestionanswer=mysql_query("DELETE FROM answers  WHERE questionId='".$imageid."'");
+            $query="delete from questions where id=".$imageid;
 
             $result = mysql_query($query) or die(mysql_error());
-            
-            $getimagesuser=mysql_query("select * from imagesuser where userid=".$user_id);
+
+            $getimagesuser=mysql_query("select * from questions where entity=1 and userId=".$user_id);
 
             if(mysql_num_rows($getimagesuser)>0)
             {
@@ -56,7 +57,7 @@ if($user_id!='')
                 while($row1=mysql_fetch_array($getimagesuser))
                 {
                     $arrimagesuser[$i]['id']=$row1['id'];
-                    $arrimagesuser[$i]['userid']=$row1['userid'];
+                    $arrimagesuser[$i]['userid']=$row1['userId'];
                     $arrimagesuser[$i]['attachment']=$row1['attachment'];
                     $arrimagesuser[$i]['isselected']=$row1['isselected'];
                     $arrimagesuser[$i++]['thumb']=$row1['thumb'];
@@ -79,13 +80,13 @@ if($user_id!='')
         }
         else if($action=="markprofile")
         {
-            $query="update  usersinfo set thumb=(select thumb from imagesuser where id=".$imageid."),profile_pic=(select attachment from imagesuser where id=".$imageid.") where id= ".$user_id;
+            $query="update  usersinfo set thumb=(select thumb from questions where id=".$imageid."),profile_pic=(select attachment from questions where id=".$imageid.") where id= ".$user_id;
             $result = mysql_query($query) or die(mysql_error());
 
-            $query="update  imagesuser set isselected=0";
+            $query="update  questions set isselected=0 where userId=".$user_id;
             $result = mysql_query($query) or die(mysql_error());
 
-            $query="update  imagesuser set isselected=1 where id=".$imageid ;
+            $query="update  questions set isselected=1 where id=".$imageid ;
             $result = mysql_query($query) or die(mysql_error());
 
             echo json_encode(array("status"=>"1","message"=>"mark as profile successfully")) ;
@@ -149,13 +150,9 @@ if($user_id!='')
                             $arrimagesuser[$i]['attachment']=$row1['attachment'];
                             $arrimagesuser[$i]['isselected']=$row1['isselected'];
                             $arrimagesuser[$i++]['thumb']=$row1['thumb'];
-                            
-                            
+
                         }
-                        
-                        
-                        
-                        
+
                     }
                     else
                     {

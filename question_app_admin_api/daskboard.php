@@ -9,13 +9,13 @@
      $sqlcountusers=mysql_query("select count(*) as countuser from  usersinfo ") or die(mysql_error());
      $countuser=mysql_fetch_array($sqlcountusers)["countuser"];
 
-     $sqlcountposts=mysql_query("select count(*) as countpost from  questions") or die(mysql_error());
+     $sqlcountposts=mysql_query("select count(*) as countpost from  questions where entity=0 ") or die(mysql_error());
      $countpost=mysql_fetch_array($sqlcountposts)["countpost"];
 
-     $sqlcountnewposts=mysql_query("select count(*) as countnewpost from  questions where TIMESTAMPDIFF( HOUR ,question_date_update ,NOW())<=24 ") or die(mysql_error());
+     $sqlcountnewposts=mysql_query("select count(*) as countnewpost from  questions where  entity=0 and TIMESTAMPDIFF( HOUR ,question_date_update ,NOW())<=24 ") or die(mysql_error());
      $countnewpost=mysql_fetch_array($sqlcountnewposts)["countnewpost"];
 
-     $sqlnewposts=mysql_query("select q.*,u.email,(select count(*) from question_like_dislike where question_id=q.id) as countlike  from  questions q inner join usersinfo u on q.userid=u.id  where TIMESTAMPDIFF( HOUR ,q.question_date_update ,NOW())<=24 order by question_date_update DESC limit 5");
+     $sqlnewposts=mysql_query("select q.*,u.email,(select count(*) from question_like_dislike where question_id=q.id) as countlike  from  questions q inner join usersinfo u on q.userid=u.id  where entity=0 and TIMESTAMPDIFF( HOUR ,q.question_date_update ,NOW())<=24 order by question_date_update DESC limit 5");
      $newposts=[];
      $i=0;
      if(mysql_num_rows($sqlnewposts)>0)
@@ -24,13 +24,13 @@
          {
              $newposts[$i]["question"]=$row1["question"];
 
-             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row1['id'].""));
+             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM  answers WHERE entity=0 and questionId=".$row1['id'].""));
              $numberOfComments=$getNumberOfCommentQuery[0];
              $newposts[$i]["numberOfComments"]= $numberOfComments;
 
              $newposts[$i]["countlike"]=$row1["countlike"];
 
-             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE questionId=".$row1['id'].""));
+             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE entity=0 and questionId=".$row1['id'].""));
              $numberOfViews=$getNumberOfViewQuery[0];
              $newposts[$i]["numberOfViews"]=$numberOfViews;
 
@@ -41,7 +41,7 @@
          }
      }
 
-     $sqltoppostslike=mysql_query("select q.*,u.email,(select count(*) from question_like_dislike where question_id=q.id) as countlike from  questions q inner join usersinfo u on q.userid=u.id order by countlike DESC limit 5");
+     $sqltoppostslike=mysql_query("select q.*,u.email,(select count(*) from question_like_dislike where question_id=q.id) as countlike from  questions q inner join usersinfo u on q.userid=u.id where q.entity=0 order by countlike DESC limit 5");
      $toppostslike=[];
      $i=0;
      if(mysql_num_rows($sqltoppostslike)>0)
@@ -50,13 +50,13 @@
          {
              $toppostslike[$i]["question"]=$row1["question"];
 
-             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row1['id'].""));
+             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE entity=0 and questionId=".$row1['id'].""));
              $numberOfComments=$getNumberOfCommentQuery[0];
              $toppostslike[$i]["numberOfComments"]=$numberOfComments;
 
              $toppostslike[$i]["countlike"]=$row1["countlike"];
 
-             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE questionId=".$row1['id'].""));
+             $getNumberOfViewQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions_view WHERE  questionId=".$row1['id'].""));
              $numberOfViews=$getNumberOfViewQuery[0];
              $toppostslike[$i]["numberOfViews"]=$numberOfViews;
 
@@ -66,7 +66,7 @@
          }
      }
 
-     $sqltoppostsview=mysql_query("select q.*,u.email,(select count(*) from question_like_dislike where question_id=q.id) as countlike, (select count(*) from questions_view where questionid=q.id) as countview from   questions q inner join usersinfo u on q.userid=u.id order by countview DESC limit 5");
+     $sqltoppostsview=mysql_query("select q.*,u.email,(select count(*) from question_like_dislike where question_id=q.id) as countlike, (select count(*) from questions_view where questionid=q.id) as countview from   questions q inner join usersinfo u on q.userid=u.id where q.entity=0 order by countview DESC limit 5");
      $toppostsview=[];
      $i=0;
      if(mysql_num_rows($sqltoppostsview)>0)
@@ -75,7 +75,7 @@
          {
              $toppostsview[$i]["question"]=$row1["question"];
 
-             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE questionId=".$row1['id'].""));
+             $getNumberOfCommentQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE entity=0 and questionId=".$row1['id'].""));
              $numberOfComments=$getNumberOfCommentQuery[0];
              $toppostsview[$i]["numberOfComments"]=$numberOfComments;
 

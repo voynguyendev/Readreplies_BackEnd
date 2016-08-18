@@ -157,6 +157,7 @@ $userId=isset($_REQUEST['userId'])?$_REQUEST['userId']:'';
 $question_date= date('Y-m-d h:i:s A');
 $attachment=isset($_REQUEST['attachment'])?$_REQUEST['attachment']:'';
 $tagfriends=isset($_REQUEST['tagfriends'])?$_REQUEST['tagfriends']:'';
+$entity=isset($_REQUEST['entity'])?$_REQUEST['entity']:0;
 $SERVERTest=$_SERVER['SERVER_NAME'];
     
 $hashtag=isset($_REQUEST['hashtag'])?$_REQUEST['hashtag']:'';
@@ -167,6 +168,8 @@ if($questionId!='')
 		mysql_set_charset("UTF8");
 		if($action=='delete')
 			{
+			     $deletequestionanswer=mysql_query("DELETE FROM imagesquestion  WHERE questionId='".$questionId."'");
+                $deletequestionanswer=mysql_query("DELETE FROM answers  WHERE questionId='".$questionId."'");
 				$updatequestion=mysql_query("DELETE FROM questions  WHERE id='".$questionId."'");
                 $updateimagequestion=mysql_query("DELETE FROM imagesquestion  WHERE questionid='".$questionId."'");
 				echo json_encode(array("status"=>"1","message"=>"question successfully deleted."));
@@ -219,7 +222,7 @@ if($questionId!='')
 	}
 else
 	{
-		         if($question != "" && $categoryId != "" && $subjectId != "" && $userId != ""  && $guidimage!="")
+		         if($question != "" && $subjectId != "" && $userId != ""  && $guidimage!="")
 		                 	{
 
                           //images question
@@ -244,7 +247,7 @@ else
                 //echo "INSERT INTO questions(question,categoryId,subjectId,userId,question_date,attachment,thumb) VALUES('".$question."',".$category.",".$subjectId.",".$userId.",'".$question_date."','".$filename."','".$_SERVER['SERVER_NAME']."/question_app_test/question_images/thumbs/".$thumb."')";
 
 
-                $addquestion=mysql_query("INSERT INTO questions(question,tagfriend,subjectId,userId,question_date,attachment,thumb,hashtag,question_date_update) VALUES('".$question."','".$tagfriends."',".$subjectId.",".$userId.",'".$question_date."','".$filename."','".$filenamethumb."','".$hashtag."','".$question_date."')") or die(mysql_error());
+                $addquestion=mysql_query("INSERT INTO questions(question,tagfriend,subjectId,userId,question_date,attachment,thumb,hashtag,question_date_update,entity) VALUES('".$question."','".$tagfriends."',".$subjectId.",".$userId.",'".$question_date."','".$filename."','".$filenamethumb."','".$hashtag."','".$question_date."',$entity)") or die(mysql_error());
                 $questionId = mysql_insert_id();
 
                $updateimagequestion=mysql_query("update imagesquestion set questionid='". $questionId. "' WHERE idtemplate='".$guidimage."'");
@@ -293,32 +296,34 @@ else
                                     $apple = send_app_push_notification($deviceToken[$i], $questionId, $message, $badge);
 
                                 }
-                                else{ 
+                                else{
                                   	//push notifycation in android
-								    $deviceToken[$i] = $row_frd['device_token'];  
+								    $deviceToken[$i] = $row_frd['device_token'];
 									send_push_notification( $deviceToken[$i], $questionId,$message);
                                 }
                                 $i++;
-                            } 
+                            }
                             
                         }
                         
                         
                     }
-                    
-                }
-                
-                $categoryArr=explode(',',$categoryId);
 
-                
-				foreach($categoryArr as $category)
-				{
-					
-                    $addquestioncategoryy=mysql_query("INSERT INTO categoryquestion(questionid,categoryid) values(".$questionId.",".$category.")");
-					
-				}
+                }
+                  if($categoryId!='')
+                {
+
+                   $categoryArr=explode(',',$categoryId);
+
+
+    				foreach($categoryArr as $category)
+    				{
+
+                        $addquestioncategoryy=mysql_query("INSERT INTO categoryquestion(questionid,categoryid) values(".$questionId.",".$category.")");
+
+    				}
 				//$addquestion=mysql_query("INSERT INTO questions(question,categoryId,subjectId,userId,question_date,attachment,thumb) VALUES('".mysql_real_escape_string($question)."',".$categoryId.",".$subjectId.",".$userId.",'".$question_date."','".$filename."','".$_SERVER['SERVER_NAME']."/question_app/question_images/thumbs/".$thumb."')") or die(mysql_error());
-				
+				}
 				echo json_encode(array("status"=>"1","message"=>"question successfully added."));
 				exit;
 			}

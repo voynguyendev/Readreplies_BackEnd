@@ -102,36 +102,36 @@ $user_id=isset($_REQUEST['user_id'])?$_REQUEST['user_id']:'';
                 
                 //images of user
                 
-                $getimagesuser=mysql_query("select * from imagesuser where userid=".$userinfo['userid']);
+                $getimagesuser=mysql_query("select * from questions  where questions.entity=1  and  userid=".$userinfo['userid']);
 
-                
+
                 if(mysql_num_rows($getimagesuser)>0)
                 {
-                    // $arrimagesuser=mysql_fetch_assoc($getimagesuser);
-                    
-                    $i=0;
-                    
-                    while($row1=mysql_fetch_array($getimagesuser))
-                    {
-                        $arrimagesuser[$i]['id']=$row1['id'];
-                        $arrimagesuser[$i]['userid']=$row1['userid'];
-                        $arrimagesuser[$i]['attachment']=$row1['attachment'];
-                        $arrimagesuser[$i]['isselected']=$row1['isselected'];
-                        $arrimagesuser[$i++]['thumb']=$row1['thumb'];
-                        
-                        
-                    }
-                    
-                    
-                    
-                    
-                }
-                else
                 {
                     $arrimagesuser=array();
                 }
 
-                $userinfo['imagesuser']=$arrimagesuser;
+                $userinfo['imagesuser']=$arr
+                    $i=0;
+
+                    while($row1=mysql_fetch_array($getimagesuser))
+                    {
+                        $arrimagesuser[$i]['id']=$row1['id'];
+                        $arrimagesuser[$i]['userid']=$row1['userId'];
+                        $arrimagesuser[$i]['attachment']=$row1['attachment']
+                    // $arrimagesuser=mysql_fetch_assoc($getimagesuser);
+;
+                        $arrimagesuser[$i]['isselected']=$row1['isselected'];
+                        $arrimagesuser[$i++]['thumb']=$row1['thumb'];
+
+
+                    }
+
+
+
+
+                }
+                elseimagesuser;
 
 
         
@@ -199,7 +199,7 @@ $followData=mysql_fetch_assoc(mysql_query("SELECT COUNT(*) as follow_count FROM 
     
     
 
-$getQuestion=mysql_query("SELECT questions.*,favoriteQuestion.status as favourite,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as user_image_thumb, usersinfo.profile_pic as profile_pic ,usersinfo.StatusText as StatusText,usersinfo.city as city,usersinfo.dob as dob,usersinfo.state as state,usersinfo.school as school,usersinfo.skill_and_interest as skill_and_interest, usersinfo.workat as workat,usersinfo.aboutme as aboutme FROM questions LEFT JOIN favoriteQuestion ON questions.userId=favoriteQuestion.userID AND questions.id=favoriteQuestion.questionId LEFT JOIN usersinfo ON questions.userId=usersinfo.id WHERE questions.userId=".$user_id." order by questions.id desc") or die(mysql_error());
+$getQuestion=mysql_query("SELECT questions.*,favoriteQuestion.status as favourite,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as user_image_thumb, usersinfo.profile_pic as profile_pic ,usersinfo.StatusText as StatusText,usersinfo.city as city,usersinfo.dob as dob,usersinfo.state as state,usersinfo.school as school,usersinfo.skill_and_interest as skill_and_interest, usersinfo.workat as workat,usersinfo.aboutme as aboutme FROM questions LEFT JOIN favoriteQuestion ON questions.userId=favoriteQuestion.userID AND questions.id=favoriteQuestion.questionId LEFT JOIN usersinfo ON questions.userId=usersinfo.id WHERE questions.entity=0 and questions.isblock=0 and questions.userId=".$user_id." order by questions.id desc") or die(mysql_error());
     
     //echo "ok";
     

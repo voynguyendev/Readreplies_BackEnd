@@ -34,11 +34,11 @@
            $userinfors[$i]["lname"]=   $row1["lname"]   ;
            $userinfors[$i]["disabled"]=  $row1["disabled"]   ;
 
-           $getNumberOfImagesQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM imagesuser WHERE userid='".$row1['id']."'"));
+           $getNumberOfImagesQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions WHERE entity=1 and userid='".$row1['id']."'"));
            $numberOfImages=$getNumberOfImagesQuery[0];
            $userinfors[$i]["numberOfImage"]=$numberOfImages;
 
-           $getNumberOfQuestionQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions WHERE userId='".$row1['id']."'"));
+           $getNumberOfQuestionQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM questions WHERE entity=0 and userId='".$row1['id']."'"));
            $numberOfquestions=$getNumberOfQuestionQuery[0];
            $userinfors[$i]["numberOfquestion"]=$numberOfquestions;
 

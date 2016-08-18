@@ -153,7 +153,7 @@ $status=isset($_REQUEST['status'])?$_REQUEST['status']:'';
     
 $answerid=isset($_REQUEST['answerid'])?$_REQUEST['answerid']:'';
 $action=isset($_REQUEST['action'])?$_REQUEST['action']:'';
-    
+ $entity=isset($_REQUEST['entity'])?$_REQUEST['entity']:0;
 
 
 
@@ -298,7 +298,7 @@ else
 			{
 				$filename='';
 			}
-		$addanswer=mysql_query("INSERT INTO answers(answer,questionId,userId,answer_date,attachment,status,thumb) VALUES('".mysql_real_escape_string($answer)."',".$questionId.",".$userId.",'".$answer_date."','".$filename."','".$status."','".$_SERVER['SERVER_NAME']."/question_app/answer_images/thumbs/".$thumb."')") or die(mysql_error());
+		$addanswer=mysql_query("INSERT INTO answers(answer,questionId,userId,answer_date,attachment,status,thumb,entity) VALUES('".mysql_real_escape_string($answer)."',".$questionId.",".$userId.",'".$answer_date."','".$filename."','".$status."','".$_SERVER['SERVER_NAME']."/question_app/answer_images/thumbs/".$thumb."','$entity')") or die(mysql_error());
 		
 		$insert_id = mysql_insert_id();
         $inforanswer= "select (MAX(orderindex)+1) as maxid from answers";

@@ -19,7 +19,7 @@
      mysql_query('SET CHARACTER SET utf8');
 
 
-     $query = "select q.*,u.email from  questions q inner join usersinfo u on q.userId=u.id where ('$userid'='' or q.userId= '$userid')";
+     $query = "select q.*,u.email from  questions q inner join usersinfo u on q.userId=u.id where q.entity=0 and ('$userid'='' or q.userId= '$userid')";
      if($textsearch!="")
      {
          $query=$query." and (q.question like '%".$textsearch."%' or u.email like '%".$textsearch."%')" ;

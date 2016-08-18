@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('database/connection.php');
 include('checktoken.php');
 
@@ -32,23 +32,22 @@ if($mobile!='' && $user_id !='')
 		
         //images of user
         
-        $getimagesuser=mysql_query("select * from imagesuser where userid=".$mobile);
-        
+        $getimagesuser=mysql_query("select * from questions where entity=1 and userId=".$mobile);
+
         if(mysql_num_rows($getimagesuser)>0)
         {
            // $arrimagesuser=mysql_fetch_assoc($getimagesuser);
-            
+
             $i=0;
             
                 while($row1=mysql_fetch_array($getimagesuser))
                 {
                     $arrimagesuser[$i]['id']=$row1['id'];
-                    $arrimagesuser[$i]['userid']=$row1['userid'];
+                    $arrimagesuser[$i]['userid']=$row1['userId'];
                     $arrimagesuser[$i]['attachment']=$row1['attachment'];
                     $arrimagesuser[$i]['isselected']=$row1['isselected'];
                     $arrimagesuser[$i++]['thumb']=$row1['thumb'];
-                    
-                    
+
                 }
             
 

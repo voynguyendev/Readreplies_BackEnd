@@ -199,7 +199,7 @@ function ModalslideInstanceCtrl($scope, $modalInstance, items) {
     $(items).each(function (index) {
         $scope.images.push({
             thumb: 'http://' + items[index].thumb,
-            url:  items[index].attachment,
+            url:  'http://'  + items[index].attachment,
             video: false,
 
         });

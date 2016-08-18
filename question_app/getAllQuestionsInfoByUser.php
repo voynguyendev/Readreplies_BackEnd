@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
         
@@ -87,14 +87,14 @@ if($categoriesId=="")
 	$getQuestion=mysql_query("SELECT questions . *,favoriteQuestion.status as favourite,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.profile_pic,categories.hashtag FROM  questions
 	LEFT JOIN favoriteQuestion ON questions.userId=favoriteQuestion.userID AND questions.id=favoriteQuestion.questionId left join categories  on questions.categoryId=categories.id
 	LEFT JOIN usersinfo ON questions.userId=usersinfo.id
-	WHERE   questions.userId=".$userId." order by questions.id desc") or die(mysql_error());
+	WHERE questions.entity=0 and questions.isblock=0 and   questions.userId=".$userId." order by questions.id desc") or die(mysql_error());
 }
 else
 {
 	$getQuestion=mysql_query("SELECT questions . *,favoriteQuestion.status as favourite,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.profile_pic,categories.hashtag FROM  questions
 	LEFT JOIN favoriteQuestion ON questions.userId=favoriteQuestion.userID AND questions.id=favoriteQuestion.questionId left join categories  on questions.categoryId=categories.id
 	LEFT JOIN usersinfo ON questions.userId=usersinfo.id
-	WHERE   questions.userId=".$userId." and questions.id in (select questionid from categoryquestion where categoryid in (".$categoriesId.") ) order by questions.id desc") or die(mysql_error());
+	WHERE questions.entity=0 and questions.isblock=0 and    questions.userId=".$userId." and questions.id in (select questionid from categoryquestion where categoryid in (".$categoriesId.") ) order by questions.id desc") or die(mysql_error());
 	
 }
 if(mysql_num_rows($getQuestion)>0)

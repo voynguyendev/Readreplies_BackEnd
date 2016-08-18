@@ -90,18 +90,18 @@
             if($categoriesId=='')
             {
                 
-                $getQuestion=mysql_query("SELECT questions . *,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as userthumb FROM  questions INNER JOIN usersinfo ON questions.userId=usersinfo.id where questions.isblock=0  order by questions.question_date_update desc,questions.point desc,questions.id desc LIMIT ".$rowget) or die(mysql_error());
+                $getQuestion=mysql_query("SELECT questions . *,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as userthumb FROM  questions INNER JOIN usersinfo ON questions.userId=usersinfo.id where questions.entity=0 and questions.isblock=0  order by questions.question_date_update desc,questions.point desc,questions.id desc LIMIT ".$rowget) or die(mysql_error());
             }
             else
             {
-                $getQuestion=mysql_query("SELECT questions . *,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as userthumb FROM  questions INNER JOIN usersinfo ON questions.userId=usersinfo.id  where questions.isblock=0 and  questions.id in (select questionid from categoryquestion where categoryid in ($categoriesId) ) order by questions.question_date_update desc,questions.point desc,questions.id desc LIMIT ".$rowget) or die(mysql_error());
+                $getQuestion=mysql_query("SELECT questions . *,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as userthumb FROM  questions INNER JOIN usersinfo ON questions.userId=usersinfo.id  where questions.entity=0 and questions.isblock=0 and  questions.id in (select questionid from categoryquestion where categoryid in ($categoriesId) ) order by questions.question_date_update desc,questions.point desc,questions.id desc LIMIT ".$rowget) or die(mysql_error());
                 
             }
         }
         else
         {
             $hashtag="%".$hashtag."%";
-            $getQuestion=mysql_query("SELECT questions . *,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as userthumb FROM  questions INNER JOIN usersinfo ON questions.userId=usersinfo.id  where questions.isblock=0 and  questions.id in (select questionid from categoryquestion inner join categories on categoryquestion.categoryid=categories.id where  categories.hashtag like '$hashtag' ) or questions.hashtag like '$hashtag' order by questions.question_date_update desc,questions.point desc,questions.id desc LIMIT ".$rowget) or die(mysql_error());
+            $getQuestion=mysql_query("SELECT questions . *,usersinfo.id as userid,CONCAT(usersinfo.name,' ',usersinfo.lname) as name,usersinfo.email as email,usersinfo.thumb as userthumb FROM  questions INNER JOIN usersinfo ON questions.userId=usersinfo.id  where questions.entity=0 and questions.isblock=0 and  questions.id in (select questionid from categoryquestion inner join categories on categoryquestion.categoryid=categories.id where  categories.hashtag like '$hashtag' ) or questions.hashtag like '$hashtag' order by questions.question_date_update desc,questions.point desc,questions.id desc LIMIT ".$rowget) or die(mysql_error());
             
             
             
@@ -256,6 +256,9 @@
                 $numberOfViews=$getNumberOfViewsQuery[0];
                 $questionInfo[$questionnumber]['viewcount']=$numberOfViews;
 
+                $getNumberOfAnswerAccecptedQuery=mysql_fetch_row(mysql_query("SELECT count(*) FROM answers WHERE status='accepted' and questionId=".$row['id'].""));
+                $numberOfAnswerAccecpteds=$getNumberOfAnswerAccecptedQuery[0]."";
+                $questionInfo[$questionnumber]['AnswerAccecptedcount']=$numberOfAnswerAccecpteds;
 
                 $questionnumber++;
                 

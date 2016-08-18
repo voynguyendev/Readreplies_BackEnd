@@ -67,9 +67,10 @@ function createrolecontroller($scope, $interval, COLORS, HOSTSERVER, $http, Auth
                     $state.go('user.signin');
                     return;
                 }
-                $($scope.menuobjects).each(function (index) {
+                 $scope.multiplemenuSelect=[];
+              /*  $($scope.menuobjects).each(function (index) {
                     $scope.menus.push($scope.menuobjects[index].name);
-                });
+                });  */
             $(response.menus).each(function (index) {
                $scope.multiplemenuSelect.push(response.menus[index].name);
             })

@@ -14,7 +14,7 @@
      $textsearch = isset($_REQUEST['textsearch'])?$_REQUEST['textsearch']:'';   ;
      $sortfield = isset($_REQUEST['sortfield'])?$_REQUEST['sortfield']:'';   ;
      $sortorder = isset($_REQUEST['sortorder'])?$_REQUEST['sortorder']:'';   ;
-     $query="select a.*,u.email from  answers a inner join usersinfo u on a.userId=u.id where ('$questionid'='' or a.questionId= '$questionid')";
+     $query="select a.*,u.email from  answers a inner join usersinfo u on a.userId=u.id where a.entity=0 and ('$questionid'='' or a.questionId= '$questionid')";
      if($textsearch!="")
      {
          $query=$query." and (a.answer like '%".$textsearch."%' or u.email like '%".$textsearch."%')";
