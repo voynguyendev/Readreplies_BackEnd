@@ -34,6 +34,9 @@ function managercommentcontroller($scope, $interval, COLORS, HOSTSERVER, $http, 
 
         if ($state.params != null) {
             data.questionid = $stateParams.id == undefined ? "" : $stateParams.id;
+            data.useridcomment = $stateParams.useridcomment == undefined ? "" : $stateParams.useridcomment;
+            data.useridansweraccept = $stateParams.useridansweraccept == undefined ? "" : $stateParams.useridansweraccept;
+            data.useridgood = $stateParams.useridgood == undefined ? "" : $stateParams.useridgood;
         }
         $http.post(HOSTSERVER.url + '/getAllComments.php', data, {
             headers: {

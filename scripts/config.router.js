@@ -1083,7 +1083,7 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
                         {
                             serie: true,
                             files: [
-                                       
+
                                'scripts/services/Realreplies/UserService.js',
                             ]
                         }]).then(function () {
@@ -1095,6 +1095,32 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
                   title: 'Manager Users',
               }
           }).
+
+
+
+          state('app.users.managerusersofwhere', {
+              url: '/managerusersofwhere?friendid&followerid',
+              templateUrl: 'views/Realreplies/User/manageruser.html',
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: [
+
+                               'scripts/services/Realreplies/UserService.js',
+                            ]
+                        }]).then(function () {
+                            return $ocLazyLoad.load('scripts/controllers/Realreplies/User/managerusercontroller.js');
+                        });
+                  }]
+              },
+              data: {
+                  title: 'Manager Users',
+              }
+          }).
+
+
          state('app.users.createuser', {
              url: '/createuser?email&name&lname&disabled&id',
              templateUrl: 'views/Realreplies/User/createuser.html',
@@ -1145,7 +1171,7 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
 
         .
         
-          state('app.posts.managerpostsofuser', {
+        state('app.posts.managerpostsofuser', {
               url: '/postmanagerofuser?id',
               templateUrl: 'views/Realreplies/Post/managerpost.html',
               resolve: {
@@ -1166,6 +1192,29 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
               }
           })
         .
+         state('app.posts.managerpostsofwhere', {
+              url: '/postmanagerofwhere?useridgood&useridview&userid',
+              templateUrl: 'views/Realreplies/Post/managerpost.html',
+              resolve: {
+                  deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                      return $ocLazyLoad.load([
+                        {
+                            serie: true,
+                            files: [
+                               'scripts/services/Realreplies/PostService.js',
+                            ]
+                        }]).then(function () {
+                            return $ocLazyLoad.load('scripts/controllers/Realreplies/Post/managerpostcontroller.js');
+                        });
+                  }]
+              },
+              data: {
+                  title: 'Manager Posts',
+              }
+          })
+        .
+
+
              state('app.comments', {
                  template: '<div ui-view></div>',
                  abstract: true,
@@ -1213,7 +1262,29 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
                }
            })
          .
-             state('app.roles', {
+
+           state('app.comments.managercommentsofwhere', {
+               url: '/managercommentsofwhere?useridcomment&useridansweraccept&useridgood',
+               templateUrl: 'views/Realreplies/Comment/managercommernt.html',
+               resolve: {
+                   deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                       return $ocLazyLoad.load([
+                         {
+                             serie: true,
+                             files: [
+                                'scripts/services/Realreplies/CommentService.js',
+                             ]
+                         }]).then(function () {
+                             return $ocLazyLoad.load('scripts/controllers/Realreplies/Comment/managercommentcontroller.js');
+                         });
+                   }]
+               },
+               data: {
+                   title: 'Manager Comments',
+               }
+           })
+         .
+         state('app.roles', {
                  template: '<div ui-view></div>',
                  abstract: true,
                  url: '/roles',
@@ -1284,7 +1355,7 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
                  title: 'Create Role',
              }
          }).
-        
+
       state('app.roles.editroles', {
           url: '/editrole?roleid&rolename&description',
           templateUrl: 'views/Realreplies/Role/createrole.html',
@@ -1446,6 +1517,60 @@ angular.module('ReadrepliesAdmin').run(['$rootScope', '$state', '$stateParams',
            title: 'Edit User System',
        }
    })
+   //Setting
+    .state('app.setting', {
+                 template: '<div ui-view></div>',
+                 abstract: true,
+                 url: '/setting',
+             }).
+         state('app.setting.badwords', {
+             url: '/badwords',
+             templateUrl: 'views/Realreplies/Setting/badwords.html',
+             resolve: {
+                 deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                     return $ocLazyLoad.load([
+                {
+                    insertBefore: '#load_styles_before',
+                    files: [
+                                  'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css',
+                                  'vendor/chosen_v1.4.0/chosen.min.css',
+                                  'vendor/jquery.tagsinput/src/jquery.tagsinput.css',
+                                  'vendor/checkbo/src/0.1.4/css/checkBo.min.css',
+                                  'vendor/intl-tel-input/build/css/intlTelInput.css',
+                                  'vendor/bootstrap-daterangepicker/daterangepicker-bs3.css',
+                                  'vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css',
+                                  'vendor/bootstrap-timepicker/css/bootstrap-timepicker.min.css',
+                                  'vendor/clockpicker/dist/bootstrap-clockpicker.min.css',
+                                  'vendor/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css',
+                                  'vendor/TagsInput/ng-tags-input.min.css'
+                    ]
+                },
+                {
+                    serie: true,
+                    files: [
+                                  'vendor/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.js',
+                                  'vendor/chosen_v1.4.0/chosen.jquery.min.js',
+                                  'vendor/jquery.tagsinput/src/jquery.tagsinput.js',
+                                  'vendor/checkbo/src/0.1.4/js/checkBo.min.js',
+                                  'vendor/intl-tel-input//build/js/intlTelInput.min.js',
+                                  'vendor/moment/min/moment.min.js',
+                                  'vendor/bootstrap-daterangepicker/daterangepicker.js',
+                                  'vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js',
+                                  'vendor/bootstrap-timepicker/js/bootstrap-timepicker.min.js',
+                                  'vendor/clockpicker/dist/jquery-clockpicker.min.js',
+                                  'vendor/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js' ,
+                                   'vendor/TagsInput/ng-tags-input.min.js'
+                    ]
+                }]).then(function () {
+                           return $ocLazyLoad.load('scripts/controllers/Realreplies/Setting/badwordscontroller.js');
+                       });
+                 }]
+             },
+             data: {
+                 title: 'Bad Words',
+             }
+         })
+
 
         ;
         }

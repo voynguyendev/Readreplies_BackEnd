@@ -12,14 +12,25 @@
      $textsearch = isset($_REQUEST['textsearch'])?$_REQUEST['textsearch']:'';
      $sortfield = isset($_REQUEST['sortfield'])?$_REQUEST['sortfield']:'';
      $sortorder = isset($_REQUEST['sortorder'])?$_REQUEST['sortorder']:'';
-     $query="select * from  usersinfo";
-     //  echo    $pagenumber;
-   //  echo    $start;
+     $friendid = isset($_REQUEST['friendid'])?$_REQUEST['friendid']:'';
+     $followerid = isset($_REQUEST['followerid'])?$_REQUEST['followerid']:'';
+     $query="select * from  usersinfo where 1=1 ";
 
      if($textsearch!="")
      {
-         $query=$query." where (email like '%".$textsearch."%' or name like '%".$textsearch."%' or lname like '%".$textsearch."%')" ;
+         $query=$query." and (email like '%".$textsearch."%' or name like '%".$textsearch."%' or lname like '%".$textsearch."%')" ;
      }
+
+     if($followerid!="")
+     {
+         $query=$query." and id in (select follower_id from followers where user_id='$followerid')" ;
+     }
+
+     if($friendid!="")
+     {
+         $query=$query." and (id in (select receiver_id from friendRequests where sender_id='$friendid' and status=1) or id in (select sender_id  from friendRequests where receiver_id='$friendid' and status=1) ) " ;
+     }
+
      $totalrow=mysql_num_rows(mysql_query($query))   ;
      $sqluserinfors=mysql_query($query." order by id DESC LIMIT $start,$pagesize") or die(mysql_error());
      $userinfors=[];

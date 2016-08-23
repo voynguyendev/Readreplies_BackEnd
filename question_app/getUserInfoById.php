@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('database/connection.php');
 include('checktoken.php');
 
@@ -271,6 +271,7 @@ if($mobile!='' && $friend_id!='')
 				$userinfo['skill_and_interest']=$userinfoarraay['skill_and_interest'];
 				$userinfo['city']=$userinfoarraay['city'];
 				$userinfo['profile_pic']=$userinfoarraay['profile_pic'];
+                $userinfo['thumb']=$userinfoarraay['thumb'];
 				$userinfo['AllQuestionsCount']=$getAllQuestionsCountArr[0];
 				$userinfo['SavedQuestionsCount']=$getSAvedQuestionsCountArr[0];
 				$userinfo['AllAcceptedAnswersCount']=$getAllAcceptedAnswersCountArr[0];

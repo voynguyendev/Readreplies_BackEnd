@@ -1,6 +1,6 @@
 <div class="panel" data-ng-controller="managerpostcontroller">
     <div class="panel-body">
-        <table dt-columns="dtColumns"  dt-options="dtOptions"   class="table table-bordered bordered table-striped table-condensed datatable" datatable=""    >
+        <table dt-columns="dtColumns" dt-instance="dtInstance"  dt-options="dtOptions"   class="table table-bordered bordered table-striped table-condensed datatable" datatable=""    >
             <thead>
                 <tr>
                     <th>ID</th>
@@ -15,13 +15,15 @@
             <tbody>
                 <tr ng-repeat="post in postsmanager">
                     <td style="width:5%">{{ post.id }}</td>
-                    <td style="width:30%">{{ post.question }}</td>
+                    <td style="width:20%">{{ post.question }}</td>
                     <td style="width:10%">{{ post.question_date }}</td>
                     <td style="width:10%">{{ post.question_date_update }}</td>
                     <td style="width:10%">{{ post.email }}</td>
                     <td style="width:5%">{{ post.numberOfFlag }}</td>
-                    <td style="width:30%">
-                        <button type="button" ng-click="viewcomment(post)" class="btn btn-primary">View Comments({{post.numberOfComments}})</button> <button type="button" ng-click="viewimages(post)" class="btn btn-primary">View Images({{post.numberOfImages}})</button>
+                    <td style="width:40%">
+                        <button type="button" ng-click="viewcomment(post)" class="btn btn-primary">View Comments({{post.numberOfComments}})</button>
+                        <button type="button" ng-click="viewimages(post)" class="btn btn-primary">View Images({{post.numberOfImages}})</button>
+                        <button type="button" ng-click="deletequestion(post)" class="btn btn-danger">Delete Post</button>
                         <button ng-click="blockquesion(post)" type="button" class="btn btn-danger">{{getBlockTitle(post)}}</button>
                     </td>
                 </tr>

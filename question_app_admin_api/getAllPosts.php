@@ -12,18 +12,28 @@
      $pagenumber=isset($_REQUEST['pagenumber'])?$_REQUEST['pagenumber']:'';
      $pagesize=isset($_REQUEST['pagesize'])?$_REQUEST['pagesize']:'';
      $start = $pagenumber;
-     $textsearch = isset($_REQUEST['textsearch'])?$_REQUEST['textsearch']:'';   ;
-     $sortfield = isset($_REQUEST['sortfield'])?$_REQUEST['sortfield']:'';   ;
-     $sortorder = isset($_REQUEST['sortorder'])?$_REQUEST['sortorder']:'';   ;
+     $textsearch = isset($_REQUEST['textsearch'])?$_REQUEST['textsearch']:'';
+     $sortfield = isset($_REQUEST['sortfield'])?$_REQUEST['sortfield']:'';
+     $sortorder = isset($_REQUEST['sortorder'])?$_REQUEST['sortorder']:'';
+     $useridview = isset($_REQUEST['useridview'])?$_REQUEST['useridview']:'';
+     $useridgood = isset($_REQUEST['useridgood'])?$_REQUEST['useridgood']:'';
 
      mysql_query('SET CHARACTER SET utf8');
 
 
-     $query = "select q.*,u.email from  questions q inner join usersinfo u on q.userId=u.id where q.entity=0 and ('$userid'='' or q.userId= '$userid')";
+     $query = "select q.*,u.email from  questions q inner join usersinfo u on q.userId=u.id where q.entity=0 and ('$userid'='' or q.userId= '$userid')  ";
      if($textsearch!="")
      {
          $query=$query." and (q.question like '%".$textsearch."%' or u.email like '%".$textsearch."%')" ;
+     }
 
+     if($useridview!="")
+     {
+         $query=$query." and (q.id in (select questionid from questions_view) and q.userId= '$useridview') " ;
+     }
+     if($useridgood!="")
+     {
+         $query=$query." and (q.id in (select question_id from question_like_dislike where status=1) and q.userId= '$useridgood') " ;
      }
      $totalrow=mysql_num_rows(mysql_query($query))   ;
 

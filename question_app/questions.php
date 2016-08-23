@@ -123,10 +123,10 @@ function send_app_push_notification($deviceToken, $questionId, $message, $badge=
 		// Send it to the server
 		 $result = fwrite($fp, $msg, strlen($msg));
 		 
-		 
+
 		 
 		 //$result = $msg;
-		 
+
 		if (!$result)
 		 echo 'Message not delivered' . PHP_EOL;
 		else
@@ -163,9 +163,33 @@ $SERVERTest=$_SERVER['SERVER_NAME'];
 $hashtag=isset($_REQUEST['hashtag'])?$_REQUEST['hashtag']:'';
 ///// CHECK WHETHER THE ACTION IS ADD OR EDIT OR DELETE question ///////////////
   $date = date('Y-m-d h:i:s');
+
+if($question != "")
+{
+   $sqlbadword=mysql_query("select settingvalue from tbl_setting where settingkey='badwords'") or die(mysql_error());
+    $badword=mysql_fetch_array($sqlbadword)["settingvalue"];
+    $lowerquestion=   strtolower($question) ;
+
+    if($badword!="")
+    {
+        $arrbadwords=explode(",",$badword);
+        foreach($arrbadwords as $badwordstr)
+        {
+            $lowerbadwordstr=strtolower($badwordstr);
+
+            $pos = strrpos($lowerquestion,$lowerbadwordstr);
+
+            if (!($pos === false)) { // note: three equal signs
+                echo json_encode(array("status"=>"-2","message"=>"please don't type  words : ".$badword));
+				exit;
+            }
+        }
+    }
+}
+
 if($questionId!='')
 	{
-		mysql_set_charset("UTF8");
+	   mysql_set_charset("UTF8");
 		if($action=='delete')
 			{
 			     $deletequestionanswer=mysql_query("DELETE FROM imagesquestion  WHERE questionId='".$questionId."'");
@@ -219,6 +243,7 @@ if($questionId!='')
 							}
 
 			}
+
 	}
 else
 	{

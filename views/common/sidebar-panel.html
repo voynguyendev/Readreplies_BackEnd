@@ -122,6 +122,19 @@
               </li>
           </ul>
       </li>
+      <li data-ng-class="{open: $state.includes('app.ui')}">
+          <a href="javascript:;">
+              <i class="fa fa-tint"></i>
+              <span>Setting</span>
+          </a>
+          <ul class="sub-menu">
+              <li ui-sref-active="active">
+                  <a ui-sref="app.setting.badwords">
+                      <span>Bad Words</span>
+                  </a>
+              </li>
+          </ul>
+       </li>
   </ul>
 </nav>
 <!-- /main navigation -->

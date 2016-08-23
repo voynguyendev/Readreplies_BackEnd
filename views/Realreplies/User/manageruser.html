@@ -1,5 +1,5 @@
-<div class="panel" data-ng-controller="managerusercontroller">
-    <div class="panel-body">
+<div   class="panel" data-ng-controller="managerusercontroller">
+    <div   class="panel-body">
         <table dt-columns="dtColumns" dt-options="dtOptions" class="table table-bordered bordered table-striped table-condensed datatable" datatable="">
             <thead>
                 <tr>
@@ -13,10 +13,10 @@
             <tbody>
                 <tr ng-repeat="person in usersmanager">
                     <td>{{ person.id }}</td>
-                    <td>{{ person.email }}</td>
+                    <td><a href="#" ng-click="openoverviewofuser(person)" > {{ person.email }}</a></td>
                     <td>{{ person.name }}</td>
                     <td>{{ person.lname }}</td>
-                    <td><button type="button" ng-click="edituser(person)" class="btn btn-primary">Edit</button> <button ng-click="blockuser(person)" type="button" class="btn btn-danger">{{getBlockTitle(person)}}</button><button type="button" ng-click="viewimages(person)" class="btn btn-primary">View Images({{person.numberOfImage}})</button><button type="button" ng-click="viewcomments(person)" class="btn btn-primary">View Posts({{person.numberOfquestion}})</button> </td>
+                    <td style="width:50%"><button type="button" ng-click="edituser(person)" class="btn btn-primary">Edit</button> <button ng-click="blockuser(person)" type="button" class="btn btn-danger">{{getBlockTitle(person)}}</button><button type="button" ng-click="viewimages(person)" class="btn btn-primary">View Images({{person.numberOfImage}})</button><button type="button" ng-click="viewcomments(person)" class="btn btn-primary">View Posts({{person.numberOfquestion}})</button> </td>
                 </tr>
             </tbody>
         </table>
@@ -24,7 +24,7 @@
 </div>
 
 <script type="text/ng-template" id="ModelslideImages.html">
-    <div class="container">
+    <div >
         <div class="imageContainer" ng-repeat="image in images" ng-hide="!isCurrentIndex($index)">
             <img class="imageWrapper" src="{{image.url}}"
                  ng-swipe-left="showNext()" ng-swipe-right="showPrevious()" />
@@ -32,9 +32,96 @@
         </div>
 
         <nav>
-            <div class="thumbnailWrapper">
+            <div  class="thumbnailWrapper">
                 <img ng-repeat="image in images" class="thumbnail" ng-class="{'active':isCurrentIndex($index)}" ng-click="setCurrentIndex($index);" src="{{image.thumb}}" />
             </div>
         </nav>
     </div>
+</script>
+<script type="text/ng-template" id="ModelOverviewofUser.html">
+      <div >
+        <div style="width:400px;background-color: silver" class="col-md-3">
+            <div style="padding-top: 15px" >
+                <div ng-click="viewfriend()"  class="widget bg-white">
+                    <div class="widget-icon bg-blue pull-left fa fa-microphone">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countfriend}}</span>
+                        <span  class="widget-subtitle">Friends</span>
+                    </div>
+                </div>
+                <div ng-click="viewfollower()"  class="widget bg-white">
+                    <div class="widget-icon bg-danger pull-left fa fa-tint">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countfollowers}}</span>
+                        <span class="widget-subtitle">Followers</span>
+                    </div>
+                </div>
+                <div ng-click="viewpostgood()" class="widget bg-white">
+                    <div class="widget-icon bg-success pull-left fa fa-paper-plane">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countgoodquestion}}</span>
+                        <span class="widget-subtitle">Good Questions</span>
+                    </div>
+                </div>
+                 <div ng-click="viewcommentgood()"  class="widget bg-white">
+                    <div class="widget-icon bg-blue pull-left fa fa-microphone">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countgoodcomment}}</span>
+                        <span class="widget-subtitle">Good Comments</span>
+                    </div>
+                </div>
+                <div ng-click="viewpostview()"  class="widget bg-white">
+                    <div class="widget-icon bg-danger pull-left fa fa-tint">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countviewquestion}}</span>
+                        <span class="widget-subtitle">View Posts</span>
+                    </div>
+                </div>
+                <div ng-click="viewimages()"  class="widget bg-white">
+                    <div class="widget-icon bg-success pull-left fa fa-paper-plane">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countimagesofuser}}</span>
+                        <span class="widget-subtitle">Images User</span>
+                    </div>
+                </div>
+                 <div  ng-click="viewpost()" class="widget bg-white">
+                    <div class="widget-icon bg-success pull-left fa fa-paper-plane">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countpost}}</span>
+                        <span class="widget-subtitle">Posts</span>
+                    </div>
+                </div>
+                <div ng-click="viewcomments()" class="widget bg-white">
+                    <div class="widget-icon bg-success pull-left fa fa-paper-plane">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countcomment}}</span>
+                        <span class="widget-subtitle">Comments</span>
+                    </div>
+                </div>
+                 <div ng-click="viewansweraccept()"  class="widget bg-white">
+                    <div class="widget-icon bg-success pull-left fa fa-paper-plane">
+                    </div>
+                    <div class="overflow-hidden">
+                        <span class="widget-title">{{response.countansweraccepts}}</span>
+                        <span class="widget-subtitle">Answers Accept</span>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+        </div>
+       </div>
+
+
 </script>

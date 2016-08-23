@@ -30,6 +30,14 @@ function createrolecontroller($scope, $interval, COLORS, HOSTSERVER, $http, Auth
         'menuid': "6",
         'name': 'BLOCK_POST',
     },
+    {
+        'menuid': "12",
+        'name': 'DELETE_POST',
+    },
+      {
+        'menuid': "14",
+        'name': 'CREATE_EDIT_BADWORDS',
+    },
 
     ];
     $($scope.menuobjects).each(function (index) {

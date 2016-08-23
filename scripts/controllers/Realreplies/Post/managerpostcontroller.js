@@ -15,7 +15,7 @@ function managerpostcontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
             .withOption('paging', true)
             .withPaginationType('full_numbers')
             .withDisplayLength(10)
-           
+
 
     function serverData(sSource, aoData, fnCallback, oSettings) {
        
@@ -35,6 +35,9 @@ function managerpostcontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
 
         if ($state.params != null) {
             data.userid = $stateParams.id == undefined ? "" : $stateParams.id;
+            data.userid = $stateParams.userid == undefined ? "" : $stateParams.userid;
+            data.useridgood = $stateParams.useridgood == undefined ? "" : $stateParams.useridgood;
+            data.useridview = $stateParams.useridview == undefined ? "" : $stateParams.useridview;
         }
 
 
@@ -64,7 +67,7 @@ function managerpostcontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
                 'data': [],
                 'recordsFiltered': response.data[0].TotalRows
             };
-          
+
             fnCallback(records);
             $(".dataTables_empty").hide();
 
@@ -78,15 +81,20 @@ function managerpostcontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
 
     }
 
-    
+
     $scope.dtColumns = [
 
       DTColumnBuilder.newColumn('id', 'Id'),
       DTColumnBuilder.newColumn('question', 'Content')
-    
+
     ];
 
+       $scope.dtInstance = {};
 
+   $scope.reloadData=function()
+    {
+        $scope.dtInstance._renderer.rerender();
+    }
 
 
 
@@ -151,8 +159,65 @@ function managerpostcontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
             __errorHandler.Swal(errorObj, _sweetAlert);
         })
     }
+  
 
-   
+     $scope.deletequestion = function (post) {
+        SweetAlert.swal({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this post!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: COLORS.danger,
+        confirmButtonText: 'Yes, delete it!',
+        closeOnConfirm: false,
+      },
+      function () {
+         var data = {
+            userid: post.userId,
+            questionid:post.id,
+        };
+        $http.post(HOSTSERVER.url + '/deletequestion.php', data,
+             {
+                 headers: {
+                     'Content-Type': 'application/x-www-form-urlencoded'
+                 },
+                 transformRequest: function (obj) {
+                     var str = [];
+                     for (var p in obj)
+                         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                     return str.join("&");
+                 }
+
+             }
+
+            ).success(function (response) {
+
+                if (response.status == "-1") {
+                    SweetAlert.swal('Access Denied!', "you can't have permission to access  this page ", 'error');
+                    return;
+                }
+                else if (response.status == "-2") {
+                    $state.go('user.signin');
+                    return;
+                }
+                 else if (response.status == "1") {
+                    SweetAlert.swal('Delete!', 'You deleted this question!', 'success');
+                     $scope.reloadData();
+                    return;
+                }
+
+
+
+
+        }).error(function (errors, status) {
+            var errorObj = __errorHandler.ProcessErrors(errors);
+            __errorHandler.Swal(errorObj, _sweetAlert);
+        })
+      });
+
+
+    }
+
     $scope.blockquesion = function (post) {
         var data = {
             userid: post.userId,
@@ -172,7 +237,7 @@ function managerpostcontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
                  }
 
              }
-            
+
             ).success(function (response) {
 
                 if (response.status == "-1") {
@@ -188,7 +253,7 @@ function managerpostcontroller($scope, $interval, COLORS, HOSTSERVER, $http, Aut
                 if (post.isblock == "0") {
                     post.isblock = "1";
                     SweetAlert.swal('Block!', 'You Blocked this question!', 'success');
-                
+
             }
             else {
                     post.isblock = "0";
